@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping
     public User getUser(@PathVariable String username){
-        ControllerHandler.handleException(() -> {
+        return ControllerHandler.handleException(() -> {
             return userService.getUser(username);
         });
     }
