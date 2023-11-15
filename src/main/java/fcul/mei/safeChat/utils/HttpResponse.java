@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class HttpResponse {
 
+
     @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "User Not Found")
     public static class UserNotFound extends Exception {
         public UserNotFound() {

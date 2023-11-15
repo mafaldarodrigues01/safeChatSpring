@@ -1,11 +1,14 @@
 package fcul.mei.safeChat.utils;
 
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+
 import java.util.function.Supplier;
 
 public class ControllerHandler {
-    public static <T> T handleException(Supplier<T> function) {
+    public static <T> ResponseEntity<T> handleException(Supplier<T> function, HttpStatusCode code) {
         try {
-            return function.get();
+            return new ResponseEntity<>(function.get(), code);
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
             throw e;
