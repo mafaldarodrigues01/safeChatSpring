@@ -10,10 +10,10 @@ public class User {
 
     @Id
     @Column(name = "username")
-     String username;
+    String username;
 
     @Column(name = "password")
-     String password;
+    String password;
 
     @ManyToMany(mappedBy="users")
      Set<Group> groups;
