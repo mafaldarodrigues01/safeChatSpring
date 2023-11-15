@@ -33,4 +33,10 @@ public class Message {
         this.group = group;
     }
 
+    public Message(){
+        this.message = "";
+        this.user = new User();
+        this.group = new Group();
+    }
+
 }

@@ -20,10 +20,6 @@ public class ChatClient {
     @Autowired
     UserRepository userRepository;
 
-    public static void main(String [] args){
-        //addNewClientClient()
-    }
-
 
     public void addNewClientClient() {
         ChatClient chatClient = new ChatClient();

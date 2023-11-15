@@ -8,7 +8,7 @@ import java.util.Set;
 
 
 @Entity(name = "Group")
-@Table(name = "group")
+@Table(name = "groupp")
 
 public class Group {
 
@@ -37,6 +37,11 @@ public class Group {
             this.groupName = groupName;
         else
             this.groupName = groupNameGenerator(users);
+    }
+
+    public Group(){
+        this.users = Set.of();
+        this.groupName = null;
     }
 
     private static String groupNameGenerator(@org.jetbrains.annotations.NotNull Set<User> users){
