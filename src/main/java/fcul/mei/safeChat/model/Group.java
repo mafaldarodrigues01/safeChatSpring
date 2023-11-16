@@ -17,21 +17,21 @@ public class Group {
     @Column(name = "gid")
     private int gid;
 
-    @Column(name = "group_name")
+    @Column(name = "groupname")
     String groupName;
 
     @NonNull
     @ManyToMany(mappedBy = "")
     @JoinTable(name="group_user",
-            joinColumns=@JoinColumn(name="username"),
-            inverseJoinColumns=@JoinColumn(name="gid"))
+            joinColumns=@JoinColumn(name="gid"),
+            inverseJoinColumns=@JoinColumn(name="uid"))
     Set<User> users;
 
     @OneToMany(mappedBy = "group")
     Set<Message> messages;
 
     //creates a new window chat with no initial messages
-    public Group(Set<User> users, String groupName){
+    public Group( String groupName, Set<User> users){
         this.users = users;
         if(groupName != null)
             this.groupName = groupName;

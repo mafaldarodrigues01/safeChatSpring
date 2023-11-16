@@ -1,17 +1,21 @@
 package fcul.mei.safeChat.utils;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.function.Supplier;
 
 public class ControllerHandler {
-    public static <T> ResponseEntity<T> handleException(Supplier<T> function, HttpStatusCode code) {
+    public static <T> ResponseEntity<T> handleException(ThrowingSupplier<T> function, HttpStatusCode code) {
         try {
-            return new ResponseEntity<>(function.get(), code);
+            T ret = function.get();
+            return new ResponseEntity<>(ret, code);
+        } catch (HttpResponse.UserNotFound e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User hasn't been found", e);
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-            throw e;
+            throw new RuntimeException(e);
         }
     }
 

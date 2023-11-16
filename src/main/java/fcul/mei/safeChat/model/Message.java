@@ -13,17 +13,17 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int mid;
 
-    @Column(name = "message")
+    @Column(name = "text")
     @NonNull
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "uid")
     @NonNull
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "group")
+    @JoinColumn(name = "gid")
     @NonNull
     private Group group;
 
