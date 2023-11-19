@@ -2,6 +2,7 @@ package fcul.mei.safeChat.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "User")
@@ -9,7 +10,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name = "uid")
+    @Column(name = "uid", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer uid;
 
@@ -20,10 +21,10 @@ public class User {
     String password;
 
     @ManyToMany(mappedBy="users")
-    Set<Group> groups;
+    List<Group> groups;
 
     @OneToMany(mappedBy = "user")
-    Set<Message> messages;
+    List<Message> messages;
 
     public Integer getUid() {
         return uid;
@@ -45,19 +46,19 @@ public class User {
         this.password = password;
     }
 
-    public Set<Group> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<Group> groups) {
+    public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 
-    public Set<Message> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(Set<Message> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 

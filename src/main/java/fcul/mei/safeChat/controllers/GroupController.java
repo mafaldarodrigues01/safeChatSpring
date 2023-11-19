@@ -2,6 +2,7 @@ package fcul.mei.safeChat.controllers;
 
 import fcul.mei.safeChat.model.Group;
 import fcul.mei.safeChat.model.dto.GroupDto;
+import fcul.mei.safeChat.model.dto.GroupDtoOutput;
 import fcul.mei.safeChat.services.GroupService;
 import fcul.mei.safeChat.utils.ControllerHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,15 @@ public class GroupController {
     GroupService groupService;
 
     @PostMapping
-    public void addGroup(@RequestBody GroupDto groupDto){
+    public synchronized void addGroup(@RequestBody GroupDto groupDto){
         ControllerHandler.handleException(()->{
             return groupService.addGroup(groupDto);
         }, HttpStatus.CREATED);
     }
 
-  /*  @GetMapping("{username}/user")
-    public ResponseEntity<List<Group>> getAllGroupsOfUser(@PathVariable String username){
+    @GetMapping("{username}/user")
+    public synchronized ResponseEntity<List<GroupDtoOutput>> getAllGroupsOfUser(@PathVariable String username){
         return ControllerHandler.handleException(()->groupService.getAllGroupsOfUser(username), HttpStatus.OK);
     }
-*/
+
 }

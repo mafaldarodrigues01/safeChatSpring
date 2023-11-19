@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 
@@ -25,13 +26,43 @@ public class Group {
     @JoinTable(name="group_user",
             joinColumns=@JoinColumn(name="gid"),
             inverseJoinColumns=@JoinColumn(name="uid"))
-    Set<User> users;
+    List<User> users;
 
     @OneToMany(mappedBy = "group")
-    Set<Message> messages;
+    List<Message> messages;
+
+
+    public Integer getGid() {
+        return gid;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(String password) {
+        this.users = users;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
 
     //creates a new window chat with no initial messages
-    public Group( String groupName, Set<User> users){
+    public Group( String groupName, List<User> users){
         this.users = users;
         if(groupName != null)
             this.groupName = groupName;
@@ -40,11 +71,11 @@ public class Group {
     }
 
     public Group(){
-        this.users = Set.of();
+        this.users = List.of();
         this.groupName = null;
     }
 
-    private static String groupNameGenerator(@org.jetbrains.annotations.NotNull Set<User> users){
+    private static String groupNameGenerator(@org.jetbrains.annotations.NotNull List<User> users){
         Iterator<User> iterator = users.iterator();
         StringBuilder groupName = new StringBuilder(iterator.next().username);
         if(users.size() == 1){
