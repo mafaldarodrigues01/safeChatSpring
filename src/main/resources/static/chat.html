@@ -1,264 +1,199 @@
 <!DOCTYPE html>
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-
-
-    <title>chat room - Bootdey.com</title>
+    <title>bs4 simple chat app - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
-        body {
-  padding-top: 0;
-  font-size: 12px;
-  color: #777;
-  background: #f9f9f9;
-  font-family: 'Open Sans',sans-serif;
-  margin-top:20px;
-}
+        .group-list {
+            padding: 10px;
+            list-style: none;
+            margin: 0;
+        }
 
-.bg-white {
-  background-color: #fff;
-}
+        .group-list li {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #e6ecf3;
+        }
 
-.friend-list {
-  list-style: none;
-margin-left: -40px;
-}
+        .group-list li:hover {
+            background-color: #f0f4f8;
+        }
 
-.friend-list li {
-  border-bottom: 1px solid #eee;
-}
+        /* Seu estilo existente continua */
 
-.friend-list li a img {
-  float: left;
-  width: 45px;
-  height: 45px;
-  margin-right: 10px;
-}
+        .chat-box {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
- .friend-list li a {
-  position: relative;
-  display: block;
-  padding: 10px;
-  transition: all .2s ease;
-  -webkit-transition: all .2s ease;
-  -moz-transition: all .2s ease;
-  -ms-transition: all .2s ease;
-  -o-transition: all .2s ease;
-}
+        .chat-container {
+            position: relative;
+            padding: 1rem;
+        }
 
-.friend-list li.active a {
-  background-color: #f1f5fc;
-}
+        .chat-container li.chat-left,
+        .chat-container li.chat-right {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            margin-bottom: 40px;
+        }
 
-.friend-list li a .friend-name,
-.friend-list li a .friend-name:hover {
-  color: #777;
-}
+        .chat-container li img {
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
+        }
 
-.friend-list li a .last-message {
-  width: 65%;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
+        .chat-container li .chat-avatar {
+            margin-right: 20px;
+        }
 
-.friend-list li a .time {
-  position: absolute;
-  top: 10px;
-  right: 8px;
-}
+        .chat-container li.chat-right {
+            justify-content: flex-end;
+        }
 
-small, .small {
-  font-size: 85%;
-}
+        .chat-container li.chat-right > .chat-avatar {
+            margin-left: 20px;
+            margin-right: 0;
+        }
 
-.friend-list li a .chat-alert {
-  position: absolute;
-  right: 8px;
-  top: 27px;
-  font-size: 10px;
-  padding: 3px 5px;
-}
+        .chat-container li .chat-name {
+            font-size: .75rem;
+            color: #999999;
+            text-align: center;
+        }
 
-.chat-message {
-  padding: 60px 20px 115px;
-}
+        .chat-container li .chat-text {
+            padding: .4rem 1rem;
+            border-radius: 4px;
+            background: #ffffff;
+            font-weight: 300;
+            line-height: 150%;
+            position: relative;
+        }
 
-.chat {
-    list-style: none;
-    margin: 0;
-}
+        .chat-container li .chat-text:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 10px;
+            left: -20px;
+            border: 10px solid;
+            border-color: transparent #ffffff transparent transparent;
+        }
 
-.chat-message{
-    background: #f9f9f9;
-}
+        .chat-container li.chat-right > .chat-text {
+            text-align: right;
+        }
 
-.chat li img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50em;
-  -moz-border-radius: 50em;
-  -webkit-border-radius: 50em;
-}
+        .chat-container li.chat-right > .chat-text:before {
+            right: -20px;
+            border-color: transparent transparent transparent #ffffff;
+            left: inherit;
+        }
 
-img {
-  max-width: 100%;
-}
+        .chat-container li .chat-hour {
+            padding: 0;
+            margin-bottom: 10px;
+            font-size: .75rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0 0 15px;
+        }
 
-.chat-body {
-  padding-bottom: 20px;
-}
+        .chat-container li .chat-hour > span {
+            font-size: 16px;
+            color: #9ec94a;
+        }
 
-.chat li.left .chat-body {
-  margin-left: 70px;
-  background-color: #fff;
-}
+        .chat-container li.chat-right > .chat-hour {
+            margin: 0 15px 0 0;
+        }
 
-.chat li .chat-body {
-  position: relative;
-  font-size: 11px;
-  padding: 10px;
-  border: 1px solid #f1f5fc;
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
-  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-}
-
-.chat li .chat-body .header {
-  padding-bottom: 5px;
-  border-bottom: 1px solid #f1f5fc;
-}
-
-.chat li .chat-body p {
-  margin: 0;
-}
-
-.chat li.left .chat-body:before {
-  position: absolute;
-  top: 10px;
-  left: -8px;
-  display: inline-block;
-  background: #fff;
-  width: 16px;
-  height: 16px;
-  border-top: 1px solid #f1f5fc;
-  border-left: 1px solid #f1f5fc;
-  content: '';
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-}
-
-.chat li.right .chat-body:before {
-  position: absolute;
-  top: 10px;
-  right: -8px;
-  display: inline-block;
-  background: #fff;
-  width: 16px;
-  height: 16px;
-  border-top: 1px solid #f1f5fc;
-  border-right: 1px solid #f1f5fc;
-  content: '';
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-}
-
-.chat li {
-  margin: 15px 0;
-}
-
-.chat li.right .chat-body {
-  margin-right: 70px;
-  background-color: #fff;
-}
-
-.chat-box {
-/*
-  position: fixed;
-  bottom: 0;
-  left: 444px;
-  right: 0;
-*/
-  padding: 15px;
-  border-top: 1px solid #eee;
-  transition: all .5s ease;
-  -webkit-transition: all .5s ease;
-  -moz-transition: all .5s ease;
-  -ms-transition: all .5s ease;
-  -o-transition: all .5s ease;
-}
-
-.primary-font {
-  color: #3c8dbc;
-}
-
-a:hover, a:active, a:focus {
-  text-decoration: none;
-  outline: 0;
-}
-
-           .selected-group {
-        background-color: #ccc !important;
-    }
+        /* Seu estilo existente continua */
     </style>
-
-
 </head>
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container bootstrap snippets bootdey">
-    <div class="row">
-        <div class="col-md-4 bg-white ">
-            <div class=" row border-bottom padding-sm" style="height: 40px;">
-                Member
-            </div>
+<div class="container">
 
-            <!-- Lista de grupos agora é dinâmica e será preenchida pelo script -->
-            <ul id="group-list" class="friend-list"></ul>
+    <div class="page-title">
+        <div class="row gutters">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <h5 class="title">Chat App</h5>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"> </div>
         </div>
+    </div>
 
-        <div class="col-md-8 bg-white ">
-            <div class="chat-message">
-                <!-- Conteúdo da conversa omitido para brevidade -->
-            </div>
-            <div class="chat-box bg-white">
-                <div class="input-group">
-                    <input class="form-control border no-shadow no-rounded" placeholder="Type your message here">
-                    <span class="input-group-btn">
-                        <button class="btn btn-success no-rounded" type="button">Send</button>
-                    </span>
+    <div class="content-wrapper">
+        <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card m-0">
+                    <div class="row no-gutters">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+                            <div class="users-container">
+                                <div class="chat-search-box">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-info">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul id="group-list" class="group-list"></ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+                            <div class="selected-user">
+                                <span>To: <span class="name">Emily Russell</span></span>
+                            </div>
+                            <div class="chat-container">
+                                <ul class="chat-box chatContainerScroll">
+                                    <!-- Mensagens aqui -->
+                                </ul>
+                                <div class="form-group mt-3 mb-0">
+                                    <textarea class="form-control" rows="3" placeholder="Type your message here..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+<!-- ... Seu código existente ... -->
+<!-- ... Seu código existente ... -->
+<script>
     $(document).ready(function () {
+        // Fetch grupos e exibir na lista
         $.ajax({
-            url: "http://localhost:8080/groups/mafalda/user",
+            url: "/groups/mafalda/user",
             method: "GET",
             success: function (data) {
                 $("#group-list").empty();
                 for (var i = 0; i < data.length; i++) {
                     var group = data[i];
-
                     $("#group-list").append(`
-                        <li>
-                            <a href="#" class="clearfix" onclick="toggleSelection(this, ${group.gid})">
-                                <div class="friend-name">
-                                    <strong>${group.groupName}</strong>
-                                </div>
-                            </a>
+                        <li onclick="fetchGroupData(${group.gid})">
+                            ${group.groupName}
                         </li>
                     `);
                 }
@@ -269,16 +204,54 @@ a:hover, a:active, a:focus {
         });
     });
 
-    function toggleSelection(element, gid) {
-        // Remove a classe 'selected-group' de todos os elementos da lista
-        $("#group-list a").removeClass("selected-group");
 
-        // Adiciona a classe 'selected-group' apenas ao elemento clicado
-        $(element).addClass("selected-group");
+            window.location.href = window.location.href.split('?')[0] + `?id=${gid}`;
 
-        // Atualiza o URL da página com base no GID
-        window.location.href = `/chat.html/${gid}`;
     }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        // Função para obter parâmetros da URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Verifica se há um parâmetro "id" na URL
+        var groupId = getUrlParameter('id');
+        if (groupId) {
+            // Fetch mensagens para o grupo com o ID fornecido
+            $.ajax({
+                url: "/messages/" + groupId,
+                method: "GET",
+                success: function (messages) {
+                    // Adiciona as mensagens à caixa de chat
+                    var chatBox = $(".chat-box");
+                    chatBox.empty();
+                    for (var i = 0; i < messages.length; i++) {
+                        var message = messages[i];
+                        chatBox.append(`
+                            <li class="chat-left">
+                                <div class="chat-avatar">
+                                    <img src="${message.avatar}" alt="Avatar">
+                                    <div class="chat-name">${message.sender}</div>
+                                </div>
+                                <div class="chat-text">${message.text}</div>
+                                <div class="chat-hour"><span>${message.timestamp}</span></div>
+                            </li>
+                        `);
+                    }
+                },
+                error: function (error) {
+                    console.error("Erro ao obter mensagens:", error);
+                }
+            });
+        }
+    });
 </script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package fcul.mei.safeChat.controllers;
 
-import fcul.mei.safeChat.model.Group;
 import fcul.mei.safeChat.model.dto.GroupDto;
 import fcul.mei.safeChat.model.dto.GroupDtoOutput;
 import fcul.mei.safeChat.services.GroupService;

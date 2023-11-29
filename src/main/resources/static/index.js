@@ -1,9 +1,12 @@
 import router from "./router.js";
-import cardHandlers from "./handlers/homeHandlers.js";
+import homeHandlers from "./handlers/homeHandler.js";
 
+window.addEventListener('load', loadHandler)
+window.addEventListener('hashchange', hashChangeHandler)
 
 function loadHandler(){
-    router.addRouteHandler("", boardHandlers.getHome)
+    router.addRouteHandler("", homeHandlers.login)
+    router.addRouteHandler("chat.html/:id", homeHandlers.chat)
     router.addDefaultNotFoundRouteHandler(() => window.location.hash = "")
     hashChangeHandler()
 }

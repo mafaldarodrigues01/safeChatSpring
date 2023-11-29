@@ -10,6 +10,17 @@ function getStoreUserInfo(){
     return null
 }
 
-async function redirectPage(){
-
+async function login(mainContent, query){
+    console.log("query=",query)
 }
+
+async function chat(mainContent, query){
+    console.log("query=",query)
+}
+
+export const homeHandlers = {
+    login,
+    chat
+}
+
+export default homeHandlers
