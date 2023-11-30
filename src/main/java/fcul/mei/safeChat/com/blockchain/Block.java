@@ -6,12 +6,10 @@ public class Block {
 
     public String hash;
     public String previousHash;
-    private String data;
+    private Data data;
     private long timeStamp;
 
-    public Block(String data,
-                 String previousHash)
-    {
+    public Block(Data data, String previousHash) {
         this.data = data;
         this.previousHash
                 = previousHash;
@@ -21,8 +19,7 @@ public class Block {
                 = calculateHash();
     }
 
-    public String calculateHash()
-    {
+    public String calculateHash() {
         return Crypt.sha256(previousHash + timeStamp + data);
     }
 }

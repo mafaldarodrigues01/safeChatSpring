@@ -4,8 +4,7 @@ import java.security.MessageDigest;
 
 public class Crypt {
 
-    public static String sha256(String input)
-    {
+    public static String sha256(String input) {
         try {
             MessageDigest sha
                     = MessageDigest

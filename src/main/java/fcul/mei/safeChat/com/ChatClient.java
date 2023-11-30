@@ -4,7 +4,6 @@ import fcul.mei.safeChat.dao.GroupRepository;
 import fcul.mei.safeChat.dao.UserRepository;
 import fcul.mei.safeChat.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -56,7 +55,6 @@ public class ChatClient {
                 while (true) {
                     String clientMessage = consoleScanner.nextLine();
                     writer.println(username + ": " + clientMessage);
-                    // Adicionamos esta linha para esperar que o usuário pressione "Enter"
                     if (clientMessage.equals("")) {
                         System.out.println("Pressione Enter para enviar a mensagem.");
                     }
