@@ -94,6 +94,34 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.6.0</version>
 		</dependency>
+		<dependency>
+			<groupId>jpbc.api</groupId>
+			<artifactId>jpbc-api</artifactId>
+			<scope>system</scope>
+			<version>2.0.0</version>
+			<systemPath>${project.basedir}/lib/jpbc-api-2.0.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>jpbc.crypto</groupId>
+			<artifactId>jpbc-crypto</artifactId>
+			<scope>system</scope>
+			<version>2.0.0</version>
+			<systemPath>${project.basedir}/lib/jpbc-crypto-2.0.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>jpbc.plaf</groupId>
+			<artifactId>jpbc-plaf</artifactId>
+			<scope>system</scope>
+			<version>2.0.0</version>
+			<systemPath>${project.basedir}/lib/jpbc-plaf-2.0.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>CloudCrypto</groupId>
+			<artifactId>CloudCrypto</artifactId>
+			<scope>system</scope>
+			<version>0.0.0</version>
+			<systemPath>${project.basedir}/lib/CloudCrypto.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 	<build>
