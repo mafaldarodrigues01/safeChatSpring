@@ -1,8 +1,8 @@
 package fcul.mei.safeChat.controllers;
 
-public class ChatMessage {
+public class ChatMessagePerson {
 
-    private MessageType type;
+    private MessageTypePerson type;
     private String content;
     private String sender;
 

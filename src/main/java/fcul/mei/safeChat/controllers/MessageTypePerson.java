@@ -1,6 +1,6 @@
 package fcul.mei.safeChat.controllers;
 
-public enum MessageType {
+public enum MessageTypePerson {
     CHAT,
     JOIN,
     LEAVE
